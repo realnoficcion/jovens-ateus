@@ -265,6 +265,29 @@ export function NightWater() {
       });
     }
 
+    // ===== audio =====
+    const ambient = new Audio("/assets/sea-ambient.mp3");
+    ambient.loop = true;
+    ambient.volume = 0.45;
+    ambient.preload = "auto";
+
+    // try to play immediately; if the browser blocks autoplay (requires user
+    // gesture first), start on the first click/keypress inside the window.
+    let audioStarted = false;
+    const startAudio = () => {
+      if (audioStarted) return;
+      ambient
+        .play()
+        .then(() => { audioStarted = true; })
+        .catch(() => {
+          // waiting for user gesture
+        });
+    };
+    startAudio();
+    const kickstart = () => startAudio();
+    el.addEventListener("pointerdown", kickstart);
+    window.addEventListener("keydown", kickstart);
+
     // ===== small flickering specks on the horizon (distant lights) =====
     const SPECKS = 240;
     const specPos = new Float32Array(SPECKS * 3);
@@ -483,11 +506,15 @@ export function NightWater() {
     return () => {
       cancelAnimationFrame(rafId);
       el.removeEventListener("pointerdown", onDown);
+      el.removeEventListener("pointerdown", kickstart);
       window.removeEventListener("pointerup", onUp);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("keyup", onKeyUp);
+      window.removeEventListener("keydown", kickstart);
       window.removeEventListener("resize", onResize);
+      ambient.pause();
+      ambient.src = "";
       waterGeo.dispose();
       waterMat.dispose();
       moonGeo.dispose();

@@ -888,6 +888,16 @@ export default function Home() {
 
       <BoloSection />
 
+      <footer className="site-footer">
+        <div>jovens ateus — são paulo · 2021—</div>
+        <div className="credits">
+          sfx:{" "}
+          <a href="https://freesound.org/s/836484/" target="_blank" rel="noreferrer">
+            Calm sea at night
+          </a>{" "}
+          by kevp888 — CC BY 4.0
+        </div>
+      </footer>
     </main>
   );
 }

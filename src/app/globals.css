@@ -784,6 +784,30 @@ a { color: inherit; }
   display: block;
 }
 
+/* ============ footer ============ */
+.site-footer {
+  width: 100vw;
+  background: #000;
+  color: #6a6a6a;
+  padding: 24px 24px 28px;
+  box-sizing: border-box;
+  font-family: "SF Mono", "Menlo", "Consolas", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.site-footer .credits { color: #4a4a4a; }
+.site-footer a {
+  color: #6a6a6a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.site-footer a:hover { color: #e8e8e8; }
+
 /* ============ video section ============ */
 .video-section {
   width: 100vw;
